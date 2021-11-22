@@ -1,10 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs'
+    id 'kotlin-kapt'
 
 }
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'androidx.navigation.safeargs'
+
 
 android {
     compileSdkVersion 30
@@ -33,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -47,11 +53,16 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:design:25.2.0'
+    implementation 'com.android.support:appcompat-v7:25.2.0'
+    implementation 'com.android.support:design:25.2.0'
 
     implementation "androidx.navigation:navigation-fragment-ktx:2.0.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.0.0"
 
     implementation 'com.guolindev.permissionx:permissionx:1.6.0'
+
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 }

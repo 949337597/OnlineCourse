@@ -26,7 +26,6 @@
         android:hint="username"
         app:endIconMode="clear_text"
         app:helperText=""
-
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <!--以上属性要结合具体情况使用，这里仅展示列出-->
         <com.google.android.material.textfield.TextInputEditText

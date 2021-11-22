@@ -10,38 +10,46 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.online_course.MainActivity
 import com.example.online_course.R
-
+import com.example.online_course.databinding.FragmentWelcomeBinding
 
 
 class WelcomeFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var _binding: FragmentWelcomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btnRegister = view.findViewById<Button>(R.id.register_btn)
-        val login = view.findViewById<Button>(R.id.login_btn)
+        val btnRegister = binding.registerBtn
+        val btnLogin = binding.loginBtn
+        val skipBtn = binding.skipBtn
+
+        btnLogin.setOnClickListener {
+            val action = WelcomeFragmentDirections.actionWelcomeFragmentToLoginFragment()
+            findNavController().navigate(action)
+        }
         btnRegister.setOnClickListener {
             val action = WelcomeFragmentDirections.actionWelcomeFragmentToRegisterFragment()
             findNavController().navigate(action)
         }
 
-        val mainBtn = view.findViewById<Button>(R.id.main_btn)
-        val function: (View) -> Unit = {
-            val intent = Intent(context, MainActivity::class.java)
-            startActivity(intent)
+        skipBtn.setOnClickListener {
+            startActivity(Intent(context, MainActivity::class.java))
         }
-        mainBtn.setOnClickListener(function)
+
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }
